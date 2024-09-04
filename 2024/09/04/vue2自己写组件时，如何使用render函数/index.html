@@ -4,15 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>(前端废柴)个人经验笔记/总结</title>
+  <title>vue2自己写组件时，如何使用render函数 | (前端废柴)个人经验笔记/总结</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="(前端废柴)个人经验笔记&#x2F;总结">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。⛺⛺由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。首先需求很简单，大屏列表，需要支持滚动的效果，没了。 需求实现步骤  正常情况下接受到这样的需求，一般就是无脑上 el-table 于是咔咔一顿搞，实现了滚动效果，具体轮播用到了@david-j&#x2F;v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue2自己写组件时，如何使用render函数">
+<meta property="og:url" content="http://example.com/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="(前端废柴)个人经验笔记&#x2F;总结">
+<meta property="og:description" content="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。⛺⛺由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。首先需求很简单，大屏列表，需要支持滚动的效果，没了。 需求实现步骤  正常情况下接受到这样的需求，一般就是无脑上 el-table 于是咔咔一顿搞，实现了滚动效果，具体轮播用到了@david-j&#x2F;v">
 <meta property="og:locale">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
+<meta property="article:published_time" content="2024-09-04T06:52:09.000Z">
+<meta property="article:modified_time" content="2024-09-04T07:42:39.404Z">
 <meta property="article:author" content="small">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
   
     <link rel="alternate" href="/atom.xml" title="(前端废柴)个人经验笔记/总结" type="application/atom+xml">
   
@@ -69,9 +76,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-vue2自己写组件时，如何使用render函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-vue2自己写组件时，如何使用render函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/" class="article-date">
   <time class="dt-published" datetime="2024-09-04T06:52:09.000Z" itemprop="datePublished">2024-09-04</time>
@@ -84,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/">vue2自己写组件时，如何使用render函数</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue2自己写组件时，如何使用render函数
     </h1>
   
 
@@ -140,166 +145,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-由想学习GSAP引发的codeopen正式入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/" class="article-date">
-  <time class="dt-published" datetime="2024-08-16T08:11:31.000Z" itemprop="datePublished">2024-08-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/">由想学习GSAP引发的codeopen正式入门</a>
-    </h1>
+    <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">由想学习GSAP引发的codeopen正式入门</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>接上文，正式入门 <a target="_blank" rel="noopener" href="https://codepen.io/">codepen</a>，之前一直当成 codeopen…<span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>甚至连这篇文章的标题都还是错的</strong></p>
-<ol>
-<li><p>如何快速引入 js 库？废话不多说，直接看图：<br><img src="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/eopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/1.png"></p>
-</li>
-<li><p>别人分享的项目地址，可以快速拷贝一份到自己的项目列表内，并开始随意玩耍。这大大节约了自己找素材搭建基础框架并进一步学习的时间成本，不得不说，真的好强！！！<br><img src="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/eopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/2.png"></p>
-</li>
-<li><p>接第二点，意外发现，<code>ctrl+s</code> 也可以直接拷贝项目到自己的项目列表内。</p>
-</li>
-</ol>
-<p>完。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/" data-id="clzv0dpn00000wwg20l5mfuoj" data-title="由想学习GSAP引发的codeopen正式入门" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-本来想好好学习下GSAP，结果" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/" class="article-date">
-  <time class="dt-published" datetime="2024-08-15T07:20:48.000Z" itemprop="datePublished">2024-08-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/">本来想好好学习下GSAP，结果...</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="确实对自己有些无语啊！！！！"><a href="#确实对自己有些无语啊！！！！" class="headerlink" title="确实对自己有些无语啊！！！！"></a>确实对自己有些无语啊！！！！</h2><p><strong>本来是想着简单的学习下 GSAP，给目前自己负责的大屏项目增加点动画效果。</strong></p>
-<p>结果找的教程都感觉不是很喜欢，好不容易发现了一个老外的教程，然后发现都是用 codeopen 做示例，结果我呢，想想这么多年了，对 codeopen 几乎不怎么用，然后居然是跟着 GSAP 教程正式的【简单】入门 codeopen。然后我又想把这一刻记录到我那崭新的博客内…</p>
-<p>于是乎有了这篇水文，尴尬的时刻来了，从我写完第一篇到现在，我成功的把怎么写文章的命令过程忘了。因此我又得先到处找找看，到底要怎么写一篇 hexo 文章!!!</p>
-<p>因此暂时这篇文章的主题就从 gsap-&gt;codeopen-&gt;hexo…</p>
-<p>翻阅了 hexo 官网后，我的做法如下：</p>
-<ol>
-<li><p>输入 <code>hexo new 本想好好学习下 GSAP，结果...</code> 回车，便自动创建了一篇标题为【本想好好学习下 GSAP，结果…】的文章。</p>
-</li>
-<li><p><img src="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/%E6%9E%9C/dog.png"> 日的，我忘记怎么编译发布了，先去学习一下…</p>
-</li>
-<li><p>学习的过程中，想起来，本地还可以跑服务预览，命令是 <code>hexo s</code></p>
-</li>
-<li><p>然后我又想引入这个狗头，发现图片不知道怎么回事裂开。再研究下…</p>
-</li>
-<li><p>找到方案了。在 _config.yml 文件内更改或增加配置如下：</p>
-</li>
-</ol>
-<figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
-
-<ol start="6">
-<li><p>重新生成文章后，把 <code>dog.png </code>直接放到文章同名的文件夹内，然后引用时候直接写 <code>![狗](dog.png)</code> 即可。<strong>注意：一定要记得重启服务</strong></p>
-</li>
-<li><p>妈了个巴子，差点关机了，搞了半天发现正事还没干啊 <span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 。</p>
-</li>
-<li><p>学成归来，由于我先前配置好了一键部署到 git,（具体怎么弄的，我已经忘记。）只要输入 <code>hexo g</code> 本地生成，然后 <code>hexo d</code>，便可直接部署到 git。</p>
-</li>
-</ol>
-<p>完。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/" data-id="clzuybcca00010og29oemg6tu" data-title="本来想好好学习下GSAP，结果..." class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-我的第一篇Hexo博客文章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="article-date">
-  <time class="dt-published" datetime="2024-08-05T08:00:28.000Z" itemprop="datePublished">2024-08-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇Hexo博客文章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="首先简单讲讲为啥要开始写博客了？"><a href="#首先简单讲讲为啥要开始写博客了？" class="headerlink" title="首先简单讲讲为啥要开始写博客了？"></a>首先简单讲讲为啥要开始写博客了？</h3><p>原因简单粗暴：<strong>我是真的记不住！！！！</strong></p>
-<h3 id="其次"><a href="#其次" class="headerlink" title="其次"></a>其次</h3><p><strong>本博客文章内容仅供个人回忆备查，不讨论不引战可能恰饭。</strong></p>
-<p>完。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="clzgphze5000024g2bp1w9efa" data-title="我的第一篇Hexo博客文章" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
