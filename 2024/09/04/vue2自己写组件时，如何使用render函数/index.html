@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue2自己写组件时，如何使用render函数 | 个人实际工作中的一些经验/笔记/总结</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。⛺⛺由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。首先需求很简单，大屏列表，需要支持滚动的效果，没了。 需求实现步骤  正常情况下接受到这样的需求，一般就是无脑上 el-table 于是咔咔一顿搞，实现了滚动效果，具体轮播用到了@david-j&#x2F;v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue2自己写组件时，如何使用render函数">
+<meta property="og:url" content="http://example.com/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="个人实际工作中的一些经验&#x2F;笔记&#x2F;总结">
+<meta property="og:description" content="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。⛺⛺由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。首先需求很简单，大屏列表，需要支持滚动的效果，没了。 需求实现步骤  正常情况下接受到这样的需求，一般就是无脑上 el-table 于是咔咔一顿搞，实现了滚动效果，具体轮播用到了@david-j&#x2F;v">
+<meta property="og:locale">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
+<meta property="article:published_time" content="2024-09-04T06:52:09.000Z">
+<meta property="article:modified_time" content="2024-09-06T09:22:55.138Z">
+<meta property="article:author" content="small">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8">
+  
+    <link rel="alternate" href="/atom.xml" title="个人实际工作中的一些经验/笔记/总结" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人实际工作中的一些经验/笔记/总结</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vue2自己写组件时，如何使用render函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2024-09-04T06:52:09.000Z" itemprop="datePublished">2024-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue2自己写组件时，如何使用render函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。-tent-tent"><a href="#markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。-tent-tent" class="headerlink" title="markdown语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。:tent::tent:"></a><a target="_blank" rel="noopener" href="https://markdown.com.cn/basic-syntax/">markdown</a>语法地址，不要装逼了，过几天又啥都忘记了，老老实实每次写文章把教程打开放一边。<span class="github-emoji" style="display:inline;vertical-align:middle"><span>⛺</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>⛺</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/26fa.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></h2><h3 id="由于现在都在写-vue2，因此就记录下-vue2-如何处理，有一段时间没写-vue3-了，等用到了再说。"><a href="#由于现在都在写-vue2，因此就记录下-vue2-如何处理，有一段时间没写-vue3-了，等用到了再说。" class="headerlink" title="由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。"></a>由于现在都在写 vue2，因此就记录下 vue2 如何处理，有一段时间没写 vue3 了，等用到了再说。</h3><p><strong>首先需求很简单，大屏列表，需要支持滚动的效果，没了。</strong></p>
+<p>需求实现步骤</p>
+<ol>
+<li>正常情况下接受到这样的需求，一般就是无脑上 <code>el-table</code></li>
+<li>于是咔咔一顿搞，实现了滚动效果，具体轮播用到了<code>@david-j/vue-j-scroll</code>这个插件，没用<code>vue-seamless-scroll</code>的原因是因为后者不支持鼠标移上去后的滚轮滚动，简单的插件使用方式如下：</li>
+</ol>
+<figure class="highlight js"><figcaption><span>BaseListScroll</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;vue-j-scroll</span><br><span class="line">  ref=<span class="string">"baseListScrollRef"</span></span><br><span class="line">  <span class="keyword">class</span>=<span class="string">"base-list-scroll"</span></span><br><span class="line">  :data=<span class="string">"data"</span></span><br><span class="line">  :steep=<span class="string">"0.2"</span></span><br><span class="line">  :scroll-direction=<span class="string">"direction"</span></span><br><span class="line">  :is-roller=<span class="string">"true"</span></span><br><span class="line">  :roller-scroll-distance=<span class="string">"50"</span></span><br><span class="line">&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">&lt;/vue-j-scroll&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>写成组件，组件名 BaseListScroll，预留插槽，给需要滚动的东西不管是列表还是什么其他的东西，用的时候如下：</p>
+<figure class="highlight js"><figcaption><span>BaseListScroll使用</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">BaseListScroll</span> :key=<span class="string">"scrollKey"</span> <span class="keyword">class</span>=<span class="string">"scrollbar"</span> :direction=<span class="string">"'left'"</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in chartData"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"scroll-box"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">v-chart</span> <span class="attr">class</span>=<span class="string">"echart"</span> <span class="attr">:options</span>=<span class="string">"getSinglePieData(item)"</span> <span class="attr">autoresize</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/<span class="title class_">BaseListScroll</span>&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意：组件外层需要定高。</strong></p>
+<ol start="3">
+<li><p>以上的操作都不是重点，重点是如果 BaseListScroll 组件内部我们真的直接是用了 <code>el-table</code>，那么问题就来了，滚动的时候<strong>表头</strong>也跟着一起滚了，这是不能容忍的，然后又嘎嘎一顿百度，看看怎么处理，解决方案要么就自己模拟一个简单的表头，再把<code>el-table</code>原有的表头隐藏。这么做能实现效果，但是又存在表头和内容可能对不齐的坑。还有别的方案，太复杂看不懂，算了，于是滚动表格放弃使用<code>el-table</code>,自己写一个组件。</p>
+</li>
+<li><p>正文开始，把整个组件放上来，后期自己要用的时候，方便。</p>
+</li>
+</ol>
+<figure class="highlight js"><figcaption><span>BaseListScrollWithTableHeaderV2</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"blswthRef"</span> <span class="attr">class</span>=<span class="string">"base-list-scroll-with-table-header-v2"</span> <span class="attr">:style</span>=<span class="string">"blswthStyle"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    {/* 此处模拟表头 */}</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"blswthHeaderRef"</span> <span class="attr">class</span>=<span class="string">"blswth-line blswth-line--header"</span> <span class="attr">:style</span>=<span class="string">"cssVars"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">"(value, prop) in _tableData[0]"</span> <span class="attr">:key</span>=<span class="string">"prop"</span>&gt;</span>{{ value.label }}<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">    {/* 此处使用我们上面搞好的滚动组件 */}</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">BaseListScroll</span> <span class="attr">v-if</span>=<span class="string">"tableData.length"</span> <span class="attr">:data</span>=<span class="string">"tableData"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in tableData"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"blswth-line"</span> <span class="attr">:style</span>=<span class="string">"cssVars"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">"(label, prop) in headerData"</span> <span class="attr">:key</span>=<span class="string">"prop"</span> <span class="attr">class</span>=<span class="string">"fz-12"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">"typeof _tableData[0][prop].formatter === 'function'"</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            {/* 重点在此,render组件 */}</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">FormatterRender</span> <span class="attr">:formatter</span>=<span class="string">"_tableData[0][prop].formatter"</span> <span class="attr">:data</span>=<span class="string">"item"</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-else</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            {{ item[prop] }}</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">BaseListScroll</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">FormatterRender</span> <span class="keyword">from</span> <span class="string">'./components/FormatterRender.vue'</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">components</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title class_">FormatterRender</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">props</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 表格数据</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">tableData</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">type</span>: <span class="title class_">Array</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="title function_">default</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> []</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 表头数据</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">columns</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">type</span>: <span class="title class_">Array</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="title function_">default</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> []</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">data</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">blswthStyle</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">width</span>: <span class="string">'100%'</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">computed</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 由传递进来的数据决定列数量</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">cssVars</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">// 首先判断是否有传递了宽度的</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">columns</span>.<span class="title function_">some</span>(<span class="function"><span class="params">i</span> =&gt;</span> i.<span class="property">width</span>)) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 如果有，就要指定列宽</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> str = <span class="variable language_">this</span>.<span class="property">columns</span>.<span class="title function_">map</span>(<span class="function"><span class="params">i</span> =&gt;</span> (i.<span class="property">width</span> ? <span class="variable language_">this</span>.$px2rem(i.<span class="property">width</span>) : <span class="string">'1fr'</span>)).<span class="title function_">join</span>(<span class="string">' '</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="string">'grid-template-columns'</span>: str</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">// 否则平均分配</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">return</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="string">'grid-template-columns'</span>: <span class="string">`repeat(<span class="subst">${<span class="variable language_">this</span>.columns.length}</span>, 1fr)`</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 把表头数据处理成和表格数据一样的结构</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">headerData</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">columns</span>.<span class="title function_">reduce</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        a[b.<span class="property">prop</span>] = {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          ...b</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> a</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      }, {})</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 把整理好的表头塞进去</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">_tableData</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">return</span> [<span class="variable language_">this</span>.<span class="property">headerData</span>, ...<span class="variable language_">this</span>.<span class="property">tableData</span>]</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">created</span>(<span class="params"></span>) {},</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">mounted</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">this</span>.<span class="title function_">getWrapperWidth</span>()</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  },</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">methods</span>: {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">getWrapperWidth</span>(<span class="params"></span>) {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="variable language_">this</span>.$nextTick(<span class="function">() =&gt;</span> {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> childrens = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">blswthHeaderRef</span>.<span class="property">children</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> widthSum = <span class="title class_">Array</span>.<span class="title function_">from</span>(childrens).<span class="title function_">reduce</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b.<span class="property">offsetWidth</span>, <span class="number">0</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">this</span>.<span class="property">blswthStyle</span> = {</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="attr">width</span>: <span class="variable language_">this</span>.$px2rem(widthSum)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      })</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  }</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">}</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span> <span class="attr">scoped</span>&gt;</span><span class="language-css"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"><span class="selector-class">.base-list-scroll-with-table-header-v2</span> {</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">height</span>: <span class="number">100%</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">overflow-y</span>: hidden;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="attribute">overflow-x</span>: scroll;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="selector-class">.blswth-line</span> {</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">display</span>: grid;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">padding</span>: <span class="number">12px</span> <span class="number">0</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">text-align</span>: center;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    &amp; &gt; <span class="selector-tag">span</span> {</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">display</span>: flex;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">align-items</span>: center;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">justify-content</span>: center;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">white-space</span>: wrap;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    &amp;<span class="selector-pseudo">:nth-of-type</span>(even) {</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">      <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">#003a75</span>, <span class="number">0.5</span>);</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    }</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  }</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  <span class="selector-class">.blswth-line--header</span> {</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">white-space</span>: wrap;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">color</span>: <span class="number">#00c7fd</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">    <span class="attribute">font-weight</span>: <span class="number">500</span>;</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">  }</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml">}</span></span></span><br><span class="line"><span class="language-css"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>render 函数对应的组件</p>
+<figure class="highlight js"><figcaption><span>FormatterRender</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  <span class="attr">props</span>: {</span><br><span class="line">    <span class="attr">formatter</span>: {</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">Function</span>,</span><br><span class="line">      <span class="title function_">default</span>(<span class="params"></span>) {}</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">data</span>: {</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">Object</span>,</span><br><span class="line">      <span class="attr">default</span>: <span class="function">() =&gt;</span> {}</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="title function_">render</span>(<span class="params">h</span>) {</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">formatter</span>(h, <span class="variable language_">this</span>.<span class="property">data</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="5">
+<li>如何使用我们封装好的 BaseListScrollWithTableHeaderV2 滚动组件</li>
+</ol>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">"chart-wrap"</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">BaseListScrollWithTableHeaderV2</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">v-if</span>=<span class="string">"tableData.length"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">:columns</span>=<span class="string">"columns"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">:table-data</span>=<span class="string">"tableData"</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  &gt;</span><span class="tag">&lt;/<span class="name">BaseListScrollWithTableHeaderV2</span>&gt;</span></span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">NoData</span> <span class="attr">v-else</span> <span class="attr">:loading</span>=<span class="string">"loading"</span> /&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意外层容器 chart-wrap 要设置高度</strong><br>columns 接收 prop，label，formatter，参考代码如下</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">columns</span>: [</span><br><span class="line">  {</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">"date"</span>,</span><br><span class="line">    <span class="attr">label</span>: <span class="string">"月份"</span>,</span><br><span class="line">  },</span><br><span class="line">  {</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">"consumption"</span>,</span><br><span class="line">    <span class="attr">label</span>: <span class="string">`总用<span class="subst">${[<span class="string">"水"</span>, <span class="string">"电"</span>, <span class="string">"气"</span>][<span class="variable language_">this</span>.active]}</span>量 (<span class="subst">${</span></span></span><br><span class="line"><span class="subst"><span class="string">      [<span class="string">"吨"</span>, <span class="string">"kw/h"</span>, <span class="string">"m³"</span>][<span class="variable language_">this</span>.active]</span></span></span><br><span class="line"><span class="subst"><span class="string">    }</span>)`</span>,</span><br><span class="line">  },</span><br><span class="line">  <span class="comment">// {</span></span><br><span class="line">  <span class="comment">//   prop: "monthOnMonthRate",</span></span><br><span class="line">  <span class="comment">//   label: "环比",</span></span><br><span class="line">  <span class="comment">//   formatter: (h, data) =&gt; {</span></span><br><span class="line">  <span class="comment">//     if (data.monthOnMonthRate) {</span></span><br><span class="line">  <span class="comment">//       return `${data.monthOnMonthRate}%`;</span></span><br><span class="line">  <span class="comment">//     }</span></span><br><span class="line">  <span class="comment">//     return "";</span></span><br><span class="line">  <span class="comment">//   },</span></span><br><span class="line">  <span class="comment">// },</span></span><br><span class="line">  <span class="comment">// 注意：不可像上方那样直接return返回值，需要返回一个标签将内容包裹，参考下方。jsx语法</span></span><br><span class="line">  {</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">"monthOnMonthRate"</span>,</span><br><span class="line">    <span class="attr">label</span>: <span class="string">"环比"</span>,</span><br><span class="line">    <span class="attr">formatter</span>: <span class="function">(<span class="params">h, data</span>) =&gt;</span> {</span><br><span class="line">      <span class="keyword">if</span> (data.<span class="property">monthOnMonthRate</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>{`${data.monthOnMonthRate}%`}<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>;</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    },</span><br><span class="line">  },</span><br><span class="line">  {</span><br><span class="line">    <span class="attr">prop</span>: <span class="string">"操作"</span>,</span><br><span class="line">    <span class="attr">label</span>: <span class="string">"操作"</span>,</span><br><span class="line">    <span class="attr">formatter</span>: <span class="function">(<span class="params">h, data</span>) =&gt;</span> {</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">onClick</span>=<span class="string">{()</span> =&gt;</span> this.handleClickDetail(data)}&gt;</span></span><br><span class="line"><span class="language-xml">          详情</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span></span><br><span class="line">      );</span><br><span class="line">    },</span><br><span class="line">  },</span><br><span class="line">];</span><br></pre></td></tr></tbody></table></figure>
+
+<p>至此，自己封装的组件要如何使用 render 函数结束。</p>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><p>本人所知的，render 函数的使用方式还有以下两种方案</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式二 .js格式</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  <span class="attr">functional</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="title function_">render</span>(<span class="params">h, { props }</span>) {</span><br><span class="line">    <span class="keyword">return</span> props.<span class="title function_">formatter</span>(h, props.<span class="property">data</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式三 .vue格式</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> {</span><br><span class="line">  <span class="attr">props</span>: {</span><br><span class="line">    <span class="attr">formatter</span>: {</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">Function</span>,</span><br><span class="line">      <span class="title function_">default</span>(<span class="params"></span>) {}</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">data</span>: {</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">Object</span>,</span><br><span class="line">      <span class="attr">default</span>: <span class="function">() =&gt;</span> {}</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="title function_">render</span>(<span class="params">h</span>) {</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">formatter</span>(h, <span class="variable language_">this</span>.<span class="property">data</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<p>完。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/" data-id="cm6slw3a10001ukg2h4mh7s5r" data-title="vue2自己写组件时，如何使用render函数" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0echarts%E5%9B%BE%E8%A1%A8%E7%9A%84tooltip%E8%87%AA%E5%8A%A8%E8%BD%AE%E6%92%AD%EF%BC%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          如何实现echarts图表的tooltip自动轮播？
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">由想学习GSAP引发的codeopen正式入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/05/GIF%E6%95%88%E6%9E%9C%E5%9B%BE%E8%A1%A5%E5%85%85/">GIF效果图补充</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/09/%E5%A4%A7%E5%B1%8F%E5%B8%83%E5%B1%80%EF%BC%9Aflex%E4%B8%8Egrid%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BF%83%E5%BE%97/">大屏布局：flex与grid的实践心得</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0echarts%E5%9B%BE%E8%A1%A8%E7%9A%84tooltip%E8%87%AA%E5%8A%A8%E8%BD%AE%E6%92%AD%EF%BC%9F/">如何实现echarts图表的tooltip自动轮播？</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/">vue2自己写组件时，如何使用render函数</a>
+          </li>
+        
+          <li>
+            <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/">由想学习GSAP引发的codeopen正式入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 small<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

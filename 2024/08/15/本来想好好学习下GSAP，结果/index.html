@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>本来想好好学习下GSAP，结果... | 个人实际工作中的一些经验/笔记/总结</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="确实对自己有些无语啊！！！！本来是想着简单的学习下 GSAP，给目前自己负责的大屏项目增加点动画效果。 结果找的教程都感觉不是很喜欢，好不容易发现了一个老外的教程，然后发现都是用 codeopen 做示例，结果我呢，想想这么多年了，对 codeopen 几乎不怎么用，然后居然是跟着 GSAP 教程正式的【简单】入门 codeopen。然后我又想把这一刻记录到我那崭新的博客内… 于是乎有了这篇水文，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本来想好好学习下GSAP，结果...">
+<meta property="og:url" content="http://example.com/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/index.html">
+<meta property="og:site_name" content="个人实际工作中的一些经验&#x2F;笔记&#x2F;总结">
+<meta property="og:description" content="确实对自己有些无语啊！！！！本来是想着简单的学习下 GSAP，给目前自己负责的大屏项目增加点动画效果。 结果找的教程都感觉不是很喜欢，好不容易发现了一个老外的教程，然后发现都是用 codeopen 做示例，结果我呢，想想这么多年了，对 codeopen 几乎不怎么用，然后居然是跟着 GSAP 教程正式的【简单】入门 codeopen。然后我又想把这一刻记录到我那崭新的博客内… 于是乎有了这篇水文，">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/dog.png">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8">
+<meta property="article:published_time" content="2024-08-15T07:20:48.000Z">
+<meta property="article:modified_time" content="2024-08-15T07:57:49.855Z">
+<meta property="article:author" content="small">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/dog.png">
+  
+    <link rel="alternate" href="/atom.xml" title="个人实际工作中的一些经验/笔记/总结" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">个人实际工作中的一些经验/笔记/总结</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-本来想好好学习下GSAP，结果" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/" class="article-date">
+  <time class="dt-published" datetime="2024-08-15T07:20:48.000Z" itemprop="datePublished">2024-08-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      本来想好好学习下GSAP，结果...
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="确实对自己有些无语啊！！！！"><a href="#确实对自己有些无语啊！！！！" class="headerlink" title="确实对自己有些无语啊！！！！"></a>确实对自己有些无语啊！！！！</h2><p><strong>本来是想着简单的学习下 GSAP，给目前自己负责的大屏项目增加点动画效果。</strong></p>
+<p>结果找的教程都感觉不是很喜欢，好不容易发现了一个老外的教程，然后发现都是用 codeopen 做示例，结果我呢，想想这么多年了，对 codeopen 几乎不怎么用，然后居然是跟着 GSAP 教程正式的【简单】入门 codeopen。然后我又想把这一刻记录到我那崭新的博客内…</p>
+<p>于是乎有了这篇水文，尴尬的时刻来了，从我写完第一篇到现在，我成功的把怎么写文章的命令过程忘了。因此我又得先到处找找看，到底要怎么写一篇 hexo 文章!!!</p>
+<p>因此暂时这篇文章的主题就从 gsap-&gt;codeopen-&gt;hexo…</p>
+<p>翻阅了 hexo 官网后，我的做法如下：</p>
+<ol>
+<li><p>输入 <code>hexo new 本想好好学习下 GSAP，结果...</code> 回车，便自动创建了一篇标题为【本想好好学习下 GSAP，结果…】的文章。</p>
+</li>
+<li><p><img src="/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/dog.png"> 日的，我忘记怎么编译发布了，先去学习一下…</p>
+</li>
+<li><p>学习的过程中，想起来，本地还可以跑服务预览，命令是 <code>hexo s</code></p>
+</li>
+<li><p>然后我又想引入这个狗头，发现图片不知道怎么回事裂开。再研究下…</p>
+</li>
+<li><p>找到方案了。在 _config.yml 文件内更改或增加配置如下：</p>
+</li>
+</ol>
+<figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="6">
+<li><p>重新生成文章后，把 <code>dog.png </code>直接放到文章同名的文件夹内，然后引用时候直接写 <code>![狗](dog.png)</code> 即可。<strong>注意：一定要记得重启服务</strong></p>
+</li>
+<li><p>妈了个巴子，差点关机了，搞了半天发现正事还没干啊 <span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji" style="display:inline;vertical-align:middle"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> 。</p>
+</li>
+<li><p>学成归来，由于我先前配置好了一键部署到 git,（具体怎么弄的，我已经忘记。）只要输入 <code>hexo g</code> 本地生成，然后 <code>hexo d</code>，便可直接部署到 git。</p>
+</li>
+</ol>
+<p>完。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/08/15/%E6%9C%AC%E6%9D%A5%E6%83%B3%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0%E4%B8%8BGSAP%EF%BC%8C%E7%BB%93%E6%9E%9C/" data-id="cm6slw3a40005ukg20ubo2xg8" data-title="本来想好好学习下GSAP，结果..." class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          由想学习GSAP引发的codeopen正式入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Hexo%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">我的第一篇Hexo博客文章</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/05/GIF%E6%95%88%E6%9E%9C%E5%9B%BE%E8%A1%A5%E5%85%85/">GIF效果图补充</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/09/%E5%A4%A7%E5%B1%8F%E5%B8%83%E5%B1%80%EF%BC%9Aflex%E4%B8%8Egrid%E7%9A%84%E5%AE%9E%E8%B7%B5%E5%BF%83%E5%BE%97/">大屏布局：flex与grid的实践心得</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0echarts%E5%9B%BE%E8%A1%A8%E7%9A%84tooltip%E8%87%AA%E5%8A%A8%E8%BD%AE%E6%92%AD%EF%BC%9F/">如何实现echarts图表的tooltip自动轮播？</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/04/vue2%E8%87%AA%E5%B7%B1%E5%86%99%E7%BB%84%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8render%E5%87%BD%E6%95%B0/">vue2自己写组件时，如何使用render函数</a>
+          </li>
+        
+          <li>
+            <a href="/2024/08/16/%E7%94%B1%E6%83%B3%E5%AD%A6%E4%B9%A0GSAP%E5%BC%95%E5%8F%91%E7%9A%84codeopen%E6%AD%A3%E5%BC%8F%E5%85%A5%E9%97%A8/">由想学习GSAP引发的codeopen正式入门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 small<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
